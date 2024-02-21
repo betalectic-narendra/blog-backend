@@ -25,7 +25,8 @@ const authorize = async ({ prepareResult }) => {
 const handle = async ({ prepareResult, authorizeResult }) => {
   try {
     delete prepareResult.token;
-    return update("blogs",{uuid:prepareResult.uuid}, prepareResult);
+    const blog=await update("blogs",{uuid:prepareResult.uuid}, prepareResult);
+    return blog;
   } catch (error) {
     throw error;
   }

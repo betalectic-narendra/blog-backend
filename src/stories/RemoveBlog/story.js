@@ -1,6 +1,5 @@
 const verifyToken=requireUtil("randomUserVerify");
 const findKeysFromRequest=requireUtil("findKeysFromRequest");
-const knex=requireKnex();
 const {remove}=requireUtil("baseRepo")
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
   const token=req.headers.authorization.split(" ")[1];

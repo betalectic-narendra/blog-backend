@@ -1,6 +1,6 @@
 const validator = requireValidator();
-const knex = requireKnex();
 const bcrypt = require("bcrypt");
+const {first}=requireUtil("baseRepo");
 const findKeysFromRequest = requireUtil("findKeysFromRequest");
 const generateToken=requireUtil("randomUser");
 const prepare = ({ req }) => {
@@ -35,9 +35,7 @@ const validateInput = async (prepareResult) => {
 const handle = async ({ prepareResult }) => {
   try {
     await validateInput(prepareResult);
-    const user = await knex("users")
-      .where({ email: prepareResult.email })
-      .first();
+    const user = await first("users",{ email: prepareResult.email });
 
     if (!user) {
       throw {

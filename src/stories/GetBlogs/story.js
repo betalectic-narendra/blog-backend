@@ -1,4 +1,3 @@
-const knex=requireKnex();
 const {findAll}=requireUtil("baseRepo");
 const verifyToken=requireUtil("randomUserVerify")
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
@@ -24,8 +23,8 @@ const authorize = async ({ prepareResult }) => {
 
 const handle = async ({ prepareResult, authorizeResult }) => {
   try {
-    const userBlogs=await findAll("blogs",{creator_user_uuid:authorizeResult});
-    return userBlogs;
+    const blogs=await findAll("blogs",{creator_user_uuid:authorizeResult});
+    return blogs;
   } catch (error) {
     throw error;
   }

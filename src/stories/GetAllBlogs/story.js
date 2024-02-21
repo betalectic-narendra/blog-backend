@@ -1,4 +1,3 @@
-const knex=requireKnex();
 const {findAll}=requireUtil("baseRepo");
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
   return {};

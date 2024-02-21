@@ -1,5 +1,4 @@
 const validator = requireValidator();
-const knex = requireKnex();
 const bcrypt = require("bcrypt");
 const findKeysFromRequest = requireUtil("findKeysFromRequest");
 const {create}=requireUtil("baseRepo")

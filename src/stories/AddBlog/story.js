@@ -1,6 +1,5 @@
 const verifyToken=requireUtil("randomUserVerify");
 const findKeysFromRequest=requireUtil("findKeysFromRequest");
-const knex=requireKnex();
 const {create} =requireUtil("baseRepo");
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
   const token=req.headers.authorization.split(" ")[1];
@@ -26,7 +25,8 @@ const authorize = async ({ prepareResult }) => {
 const handle = async ({ prepareResult, authorizeResult }) => {
   try {
     delete prepareResult.token;
-    return create("blogs",{...prepareResult,creator_user_uuid:authorizeResult})
+    const blog= await create("blogs",{...prepareResult,creator_user_uuid:authorizeResult});
+    return blog;
   } catch (error) {
     throw error;
   }
