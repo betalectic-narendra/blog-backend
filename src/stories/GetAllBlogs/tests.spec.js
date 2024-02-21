@@ -1,11 +1,11 @@
 const debugLogger = requireUtil("debugLogger");
 const knex = requireKnex();
 
-describe("Test Handler CanGetPhoto", () => {
+describe("Test Handler GetAllBlogs", () => {
   it("dummy_story_which_will_pass", async () => {
     let result = {};
     try {
-      result = await testStrategy("CanGetPhoto", {
+      result = await testStrategy("GetAllBlogs", {
         prepareResult: {},
       });
     } catch (error) {

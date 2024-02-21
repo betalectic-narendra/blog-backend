@@ -3,7 +3,7 @@ const randomUser = requireUtil("randomUser");
 const knex = requireKnex();
 const httpServer = requireHttpServer();
 
-describe("Test API CanManagePhotos", () => {
+describe("Test API GetBlog", () => {
   beforeAll(async () => {
     contextClassRef.user = randomUser();
     contextClassRef.headers = {

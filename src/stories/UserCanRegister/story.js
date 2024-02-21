@@ -2,7 +2,7 @@ const validator = requireValidator();
 const knex = requireKnex();
 const bcrypt = require("bcrypt");
 const findKeysFromRequest = requireUtil("findKeysFromRequest");
-
+const {create}=requireUtil("baseRepo")
 const validateInput = async (prepareResult) => {
   const constraints = {
     email: {
@@ -27,14 +27,10 @@ const handle = async ({ prepareResult }) => {
   try {
     await validateInput(prepareResult);
     const hash = await bcrypt.hash(prepareResult.password, 10);
-    const users = await knex("users")
-      .insert({
-        email: prepareResult.email,
-        password: hash,
-      })
-      .returning("*");
-
-    return users[0];
+   return create("users",{
+      email: prepareResult.email,
+      password: hash,
+    })
   } catch (error) {
     throw error;
   }

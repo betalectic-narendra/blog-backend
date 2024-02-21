@@ -2,7 +2,7 @@ const validator = requireValidator();
 const knex = requireKnex();
 const bcrypt = require("bcrypt");
 const findKeysFromRequest = requireUtil("findKeysFromRequest");
-
+const generateToken=requireUtil("randomUser");
 const prepare = ({ req }) => {
   const payload = findKeysFromRequest(req, ["email", "password"]);
   return payload;
@@ -33,7 +33,6 @@ const validateInput = async (prepareResult) => {
 };
 
 const handle = async ({ prepareResult }) => {
-  console.log("HANDLE_INSIDE")
   try {
     await validateInput(prepareResult);
     const user = await knex("users")
@@ -53,7 +52,8 @@ const handle = async ({ prepareResult }) => {
     );
 
     if (passwordCheck) {
-      return user;
+      const {token}=await generateToken(user.uuid);
+      return {token};
     } else {
       throw {
         statusCode: 401,

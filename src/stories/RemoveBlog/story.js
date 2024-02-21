@@ -1,20 +1,23 @@
+const verifyToken=requireUtil("randomUserVerify");
 const findKeysFromRequest=requireUtil("findKeysFromRequest");
 const knex=requireKnex();
+const {remove}=requireUtil("baseRepo")
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
-  const payload=findKeysFromRequest(req,["uuid"]);
-  return payload;
+  const token=req.headers.authorization.split(" ")[1];
+  const payload=findKeysFromRequest(req,["uuid"])
+  return {...payload,token};
 };
 
 const authorize = async ({ prepareResult }) => {
   try {
-    if (0) {
+    const {uuid}=await verifyToken(prepareResult.token);
+    if (!uuid) {
       throw {
         statusCode: 401,
         message: "Unauthorized",
       };
     }
-
-    return true;
+    return uuid;
   } catch (error) {
     throw error;
   }
@@ -22,8 +25,8 @@ const authorize = async ({ prepareResult }) => {
 
 const handle = async ({ prepareResult, authorizeResult }) => {
   try {
-    let photo=await knex("photos").where({uuid:prepareResult.uuid}).first();
-    return photo;
+    await remove("blogs",{uuid:prepareResult.uuid},)
+    return {message:"Blog deleted successfully"};
   } catch (error) {
     throw error;
   }

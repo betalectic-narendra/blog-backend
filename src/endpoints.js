@@ -14,14 +14,15 @@ module.exports = (app) => {
   return [
     {
       endpoints: [
-        ["post", "/photos", "CanManagePhotos"],
+
         ["post", "/register", "UserCanRegister"],
         ["post", "/login", "UserCanLogin"],
-        ["put","/photos/:uuid","CanUpdatePhotos"],
-        ["delete","/photos/:uuid","CanDeletePhotos"],
-        ["get","/photo/:uuid","CanGetPhoto"],
-        ["get","/photos","CanGetPhotos"],
-        ["post","/my-photos","CanGetMyPhotos"]
+        ["get","/blogs","GetAllBlogs"],
+        ["post", "/blogs", "AddBlogs"],
+        ["post","/user-blogs","GetUserBlogs"],
+        ["put","/blogs/:uuid","UpdateUserBlogs"],
+        ["delete","/blogs/:uuid","RemoveBlog"],
+
       ],
     },
   ];

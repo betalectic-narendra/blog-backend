@@ -1,19 +1,11 @@
-const findKeysFromRequest=requireUtil("findKeysFromRequest");
 const knex=requireKnex();
+const {findAll}=requireUtil("baseRepo");
 const prepare = ({ reqQuery, reqBody, reqParams, req }) => {
-  const payload=findKeysFromRequest(req,["creator_user_uuid"]);
-  return payload;
+  return {};
 };
 
 const authorize = async ({ prepareResult }) => {
   try {
-    if (0) {
-      throw {
-        statusCode: 401,
-        message: "Unauthorized",
-      };
-    }
-
     return true;
   } catch (error) {
     throw error;
@@ -22,8 +14,8 @@ const authorize = async ({ prepareResult }) => {
 
 const handle = async ({ prepareResult, authorizeResult }) => {
   try {
-    let photo=await knex("photos").where({creator_user_uuid:prepareResult.creator_user_uuid});
-    return photo;
+    const blogs=await findAll("blogs",{})
+    return blogs
   } catch (error) {
     throw error;
   }
