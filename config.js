@@ -45,11 +45,12 @@ module.exports = () => {
     excludeFromAuth: [
       "POST /register",
       "POST /login",
-      "GET /blogs",
       "POST /blogs",
+      "GET /blogs",
+      "POST /blogs/:uuid",
       "POST /user-blogs",
+      "DELETE /blogs/:uuid",
       "PUT /blogs/:uuid",
-      "DELETE /blogs/:uuid"
     ],
     responseKey: "respondResult",
     enableCORS: true,
